@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html class="light" dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PMI Midterm</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary-fixed-dim": "#87d3d3", "outline": "#6f7979", "tertiary-fixed": "#bbebeb",
+            "surface-bright": "#f7fafa", "surface-container-low": "#f1f4f4", "on-primary": "#ffffff",
+            "inverse-on-surface": "#eef1f1", "on-surface-variant": "#3f4948", "on-error": "#ffffff",
+            "secondary-container": "#fdd49a", "primary": "#3D8B8B", "tertiary-container": "#4f7c7c",
+            "tertiary-fixed-dim": "#a0cfcf", "tertiary": "#366363", "surface-container-highest": "#e0e3e3",
+            "primary-fixed": "#a3f0ef", "on-primary-fixed": "#002020", "inverse-primary": "#87d3d3",
+            "on-primary-container": "#f3fffe", "background": "#f7fafa", "surface-tint": "#0d6969",
+            "error": "#ba1a1a", "on-background": "#181c1d", "primary-container": "#308080",
+            "on-tertiary-container": "#f3fffe", "surface-variant": "#e0e3e3", "on-secondary": "#ffffff",
+            "secondary": "#77592b", "outline-variant": "#bec9c8", "inverse-surface": "#2d3131",
+            "on-secondary-container": "#785a2b", "secondary-fixed-dim": "#e8c088",
+            "surface-dim": "#d7dbdb", "on-surface": "#181c1d", "on-error-container": "#93000a",
+            "secondary-fixed": "#ffddb0", "surface-container-lowest": "#ffffff", "surface": "#f7fafa",
+            "surface-container": "#ebeeee", "on-tertiary": "#ffffff", "error-container": "#ffdad6",
+            "surface-container-high": "#e6e9e9"
+          },
+          fontFamily: {
+            headline: ["IBM Plex Sans Arabic", "Manrope", "sans-serif"],
+            body: ["IBM Plex Sans Arabic", "Inter", "sans-serif"],
+            label: ["IBM Plex Sans Arabic", "Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+    }
+
+    body {
+      background-color: #f7fafa;
+      background-image: radial-gradient(at 0% 0%, rgba(61, 139, 139, .03) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(197, 160, 107, .03) 0px, transparent 50%);
+      transition: background-color .4s, color .4s;
+      overflow-x: hidden
+    }
+
+    .dark body,
+    .dark {
+      background-color: #181c1c;
+      color: #e0e3e3
+    }
+
+    .dark body {
+      background-image: radial-gradient(at 0% 0%, rgba(135, 211, 211, .05) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(232, 192, 136, .05) 0px, transparent 50%)
+    }
+
+    .editorial-shadow {
+      box-shadow: 0 10px 30px rgba(7, 103, 103, .04)
+    }
+
+    .dark .editorial-shadow {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .3)
+    }
+
+    .dark .dark\:bg-d {
+      background: #0b0f0f
+    }
+
+    .dark .dark\:bg-card {
+      background: #1e2222
+    }
+
+    .dark .dark\:border-db {
+      border-color: #323636
+    }
+
+    .dark .dark\:text-p {
+      color: #87d3d3
+    }
+
+    .dark .dark\:text-s {
+      color: #e8c088
+    }
+
+    .dark .dark\:text-sv {
+      color: #bfc8c8
+    }
+
+    .dark .dark\:bg-sc {
+      background: #282b2b
+    }
+
+    .dark .dark\:bg-scl {
+      background: #1c2020
+    }
+
+    .bg-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden
+    }
+
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .035
+    }
+
+    .dark .bg-shape {
+      opacity: .04
+    }
+
+    @keyframes drift1 {
+      0% {
+        transform: translate(0, 0) scale(1)
+      }
+
+      25% {
+        transform: translate(60px, -40px) scale(1.1)
+      }
+
+      50% {
+        transform: translate(-30px, 70px) scale(.95)
+      }
+
+      75% {
+        transform: translate(40px, 30px) scale(1.05)
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1)
+      }
+    }
+
+    @keyframes drift2 {
+      0% {
+        transform: translate(0, 0) rotate(0deg)
+      }
+
+      33% {
+        transform: translate(-50px, 40px) rotate(120deg)
+      }
+
+      66% {
+        transform: translate(30px, -60px) rotate(240deg)
+      }
+
+      100% {
+        transform: translate(0, 0) rotate(360deg)
+      }
+    }
+
+    @keyframes drift3 {
+      0% {
+        transform: translate(0, 0) scale(1)
+      }
+
+      50% {
+        transform: translate(70px, 50px) scale(1.15)
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1)
+      }
+    }
+
+    .bg-s1 {
+      width: 400px;
+      height: 400px;
+      top: 10%;
+      left: -5%;
+      background: #3D8B8B;
+      animation: drift1 25s ease-in-out infinite
+    }
+
+    .bg-s2 {
+      width: 300px;
+      height: 300px;
+      top: 60%;
+      right: -3%;
+      background: #e8c088;
+      animation: drift2 30s linear infinite
+    }
+
+    .bg-s3 {
+      width: 250px;
+      height: 250px;
+      top: 30%;
+      left: 50%;
+      background: #87d3d3;
+      animation: drift3 20s ease-in-out infinite;
+      border-radius: 30%
+    }
+
+    .bg-s4 {
+      width: 180px;
+      height: 180px;
+      bottom: 15%;
+      left: 20%;
+      background: #3D8B8B;
+      animation: drift1 22s ease-in-out infinite reverse
+    }
+
+    .bg-s5 {
+      width: 220px;
+      height: 220px;
+      top: 5%;
+      right: 25%;
+      background: #e8c088;
+      animation: drift3 28s ease-in-out infinite;
+      border-radius: 40%
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 8px rgba(61, 139, 139, .2)
+      }
+
+      50% {
+        box-shadow: 0 0 20px rgba(61, 139, 139, .4)
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-6px)
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-12px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0)
+      }
+    }
+
+    @keyframes gentle-bounce {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-8px)
+      }
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: .6;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.15)
+      }
+    }
+
+    @keyframes heart-beat {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      15% {
+        transform: scale(1.15)
+      }
+
+      30% {
+        transform: scale(1)
+      }
+
+      45% {
+        transform: scale(1.08)
+      }
+    }
+
+    @keyframes pray-glow {
+
+      0%,
+      100% {
+        transform: scale(1) translateY(0);
+        filter: drop-shadow(0 0 0px rgba(61, 139, 139, 0))
+      }
+
+      50% {
+        transform: scale(1.08) translateY(-4px);
+        filter: drop-shadow(0 4px 12px rgba(61, 139, 139, .3))
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeUp .5s ease both
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite
+    }
+
+    .animate-slide-in {
+      animation: slideIn .4s ease both
+    }
+
+    .animate-gentle-bounce {
+      animation: gentle-bounce 2.5s ease-in-out infinite
+    }
+
+    .animate-twinkle {
+      animation: twinkle 3s ease-in-out infinite
+    }
+
+    .animate-heart-beat {
+      animation: heart-beat 2s ease-in-out infinite
+    }
+
+    .animate-pray {
+      animation: pray-glow 3s ease-in-out infinite
+    }
+
+    .stagger-1 {
+      animation-delay: .05s
+    }
+
+    .stagger-2 {
+      animation-delay: .1s
+    }
+
+    .stagger-3 {
+      animation-delay: .15s
+    }
+
+    .stagger-4 {
+      animation-delay: .2s
+    }
+
+    .stagger-5 {
+      animation-delay: .25s
+    }
+
+    .q-card {
+      transition: all .3s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .q-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(7, 103, 103, .08)
+    }
+
+    .dark .q-card:hover {
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .4)
+    }
+
+    .option-label {
+      transition: all .2s ease
+    }
+
+    .option-label:hover {
+      transform: translateX(4px);
+      background: rgba(61, 139, 139, .04)
+    }
+
+    .dark .option-label:hover {
+      background: rgba(135, 211, 211, .06) !important
+    }
+
+    .correct-answer {
+      border-color: #3D8B8B !important;
+      background: rgba(61, 139, 139, .06) !important
+    }
+
+    .dark .correct-answer {
+      background: rgba(135, 211, 211, .08) !important;
+      border-color: #87d3d3 !important
+    }
+
+    .incorrect-answer {
+      border-color: #ba1a1a !important;
+      background: rgba(186, 26, 26, .06) !important
+    }
+
+    .progress-glow {
+      animation: pulse-glow 2s ease-in-out infinite
+    }
+
+    .btn-press {
+      transition: all .15s ease
+    }
+
+    .btn-press:active {
+      transform: scale(.96)
+    }
+
+    .dark .btn-press:hover {
+      background-color: rgba(135, 211, 211, .1)
+    }
+
+    .dark button.btn-press[onclick*="resetQuiz"]:hover {
+      background-color: rgba(255, 100, 100, .15)
+    }
+
+    .dark #themeToggleDesktop:hover,
+    .dark #themeToggleMobile:hover {
+      background-color: rgba(135, 211, 211, .12) !important
+    }
+
+    .slide-item {
+      transition: all .25s ease
+    }
+
+    .slide-item:hover {
+      background: rgba(61, 139, 139, .04)
+    }
+
+    .dark .slide-item:hover {
+      background: rgba(135, 211, 211, .06)
+    }
+
+    .slide-item.active-slide {
+      background: rgba(61, 139, 139, .08);
+      border-color: #3D8B8B !important
+    }
+
+    .dark .slide-item.active-slide {
+      background: rgba(135, 211, 211, .1);
+      border-color: #87d3d3 !important
+    }
+
+    .pdf-viewer {
+      min-height: 70vh;
+      border-radius: 1.5rem;
+      overflow: hidden
+    }
+
+    .pdf-frame {
+      width: 100%;
+      height: 70vh;
+      border: none
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #bec9c8;
+      border-radius: 3px
+    }
+
+    .dark ::-webkit-scrollbar-thumb {
+      background: #3f4948
+    }
+
+    .exp-box {
+      display: none;
+      margin-top: 0;
+      padding: 1.25rem;
+      background: rgba(197, 160, 107, .05);
+      border: 1px dashed rgba(197, 160, 107, .3);
+      border-radius: 1.25rem;
+      animation: fadeUp .3s ease both
+    }
+
+    .dark .exp-box {
+      background: rgba(232, 192, 136, .03);
+      border-color: rgba(232, 192, 136, .2)
+    }
+
+    .exp-visible {
+      display: block !important
+    }
+
+    .btn-reveal {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 0.75rem;
+      transition: all 0.2s ease;
+      margin-top: 0.75rem;
+      cursor: pointer;
+    }
+
+    .btn-reveal-exp {
+      background: rgba(61, 139, 139, 0.1);
+      color: #3D8B8B;
+    }
+
+    .dark .btn-reveal-exp {
+      background: rgba(135, 211, 211, 0.1);
+      color: #87d3d3;
+    }
+
+    .btn-reveal-correct {
+      background: rgba(197, 160, 107, 0.1);
+      color: #77592b;
+    }
+
+    .dark .btn-reveal-correct {
+      background: rgba(232, 192, 136, 0.1);
+      color: #e8c088;
+    }
+
+    .btn-reveal:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .reveal-content {
+      display: none;
+      margin-top: 0.25rem;
+      animation: fadeUp 0.3s ease both;
+    }
+  </style>
+</head>
+
+<body class="font-body text-on-surface antialiased">
+
+  <div class="bg-shapes">
+    <div class="bg-shape bg-s1"></div>
+    <div class="bg-shape bg-s2"></div>
+    <div class="bg-shape bg-s3"></div>
+    <div class="bg-shape bg-s4"></div>
+    <div class="bg-shape bg-s5"></div>
+  </div>
+
+  <header id="main-header"
+    class="bg-white/80 dark:bg-card backdrop-blur-md sticky top-0 z-50 border-b border-surface-container-highest dark:border-db transition-all duration-300">
+    <div
+      class="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-0 md:h-20 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0 relative">
+      <div class="flex items-center justify-between w-full md:w-auto">
+        <span class="text-lg md:text-xl font-bold text-primary dark:text-p font-headline tracking-tight">PMI • Project Management</span>
+        <div class="flex items-center gap-2 md:hidden">
+          <button onclick="resetQuiz()"
+            class="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 dark:bg-red-900/20 text-error rounded-full text-xs font-bold btn-press">
+            <span class="material-symbols-outlined text-sm">restart_alt</span>Reset
+          </button>
+          <button onclick="toggleTheme()" id="themeToggleMobile"
+            class="p-2 text-on-surface-variant dark:text-sv rounded-full btn-press">
+            <span class="material-symbols-outlined text-xl">dark_mode</span>
+          </button>
+        </div>
+      </div>
+      <nav class="flex items-center gap-1 bg-surface-container-low dark:bg-scl p-1 rounded-full w-full md:w-auto md:absolute md:left-1/2 md:-translate-x-1/2">
+        <button onclick="showSection('quiz')" id="nav-quiz"
+          class="nav-tab flex-1 md:flex-none px-4 md:px-6 py-2 bg-white dark:bg-card shadow-sm rounded-full text-primary dark:text-p font-bold text-xs md:text-sm flex justify-center items-center gap-2 btn-press transition-all">
+          <span class="material-symbols-outlined text-base md:text-lg">quiz</span><span>الامتحان</span>
+        </button>
+        <button onclick="showSection('slides')" id="nav-slides"
+          class="nav-tab flex-1 md:flex-none px-4 md:px-6 py-2 rounded-full text-on-surface-variant dark:text-sv hover:text-primary font-medium text-xs md:text-sm flex justify-center items-center gap-2 btn-press transition-all">
+          <span class="material-symbols-outlined text-base md:text-lg">menu_book</span><span>سلايدات المادة</span>
+        </button>
+      </nav>
+      <div class="hidden md:flex items-center gap-3">
+        <button onclick="resetQuiz()"
+          class="flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 text-error hover:bg-red-100 dark:hover:bg-red-900/30 rounded-full text-xs font-bold btn-press transition-all">
+          <span class="material-symbols-outlined text-sm">restart_alt</span>Reset Quiz
+        </button>
+        <div class="w-px h-6 bg-outline-variant/30 mx-1"></div>
+        <button onclick="toggleTheme()" id="themeToggleDesktop"
+          class="p-2.5 text-on-surface-variant dark:text-sv hover:bg-surface-container dark:hover:bg-sc rounded-full btn-press transition-all">
+          <span class="material-symbols-outlined">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="min-h-screen pb-10">
+    <main id="quiz-section" class="w-full max-w-4xl mx-auto px-4 md:px-6 py-6 md:py-10">
+      <section class="mb-8 md:mb-10 animate-fade-up">
+        <div class="flex flex-col items-center text-center gap-6 mb-12">
+          <h1 class="font-headline text-3xl md:text-4xl lg:text-5xl font-black text-on-surface dark:text-white tracking-tighter">Project Management Midterm</h1>
+          <div class="flex flex-col items-center gap-3 w-full max-w-sm md:max-w-md">
+            <div class="flex items-center justify-between w-full px-1">
+              <span class="font-label text-xs md:text-sm font-bold text-secondary dark:text-s uppercase tracking-widest text-[#3D8B8B]">Progress</span>
+              <span class="font-label text-xs md:text-sm font-bold text-primary dark:text-p">
+                <span id="answered-count">0</span> / 49 <span class="hidden sm:inline">Answered</span>
+              </span>
+            </div>
+            <div class="w-full h-3 bg-surface-container-highest dark:bg-sc rounded-full overflow-hidden shadow-inner p-[2px] border border-outline-variant/10 dark:border-db">
+              <div id="progress-bar" class="h-full w-0 bg-gradient-to-r from-[#3D8B8B] to-[#5DB1B1] rounded-full progress-glow transition-all duration-1000 ease-out"></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 p-2 bg-surface-container-low dark:bg-scl rounded-2xl w-full md:w-fit">
+          <button onclick="showAllAnswers()" class="flex-1 md:flex-none px-5 py-2.5 bg-primary dark:bg-primary-fixed-dim text-white dark:text-on-primary-fixed rounded-xl font-label text-sm font-semibold shadow-md hover:opacity-90 btn-press transition-all">Show Answers</button>
+          <button onclick="hideAllAnswers()" class="flex-1 md:flex-none px-5 py-2.5 bg-white dark:bg-card text-on-surface-variant dark:text-sv border border-outline-variant/10 dark:border-db rounded-xl font-label text-sm font-semibold hover:bg-surface-bright btn-press transition-all">Hide Answers</button>
+        </div>
+      </section>
+      <div id="questions-container" class="space-y-4 md:space-y-6"></div>
+    </main>
+
+    <section id="slides-section" class="w-full max-w-5xl mx-auto px-4 md:px-6 py-6 md:py-10 hidden">
+      <h1 class="font-headline text-2xl md:text-3xl font-extrabold text-on-surface dark:text-white tracking-tight mb-8 animate-fade-up">سلايدات المادة</h1>
+      <div class="space-y-2 mb-8" id="slides-list"></div>
+      <div id="pdf-viewer-wrap" class="hidden md:block">
+        <div class="pdf-viewer bg-white dark:bg-card editorial-shadow border border-surface-container-high dark:border-db">
+          <div class="flex items-center justify-between px-6 py-4 bg-primary dark:bg-primary-container text-white">
+            <span id="pdf-title" class="font-headline font-bold text-lg">Project Management Slides</span>
+            <div class="flex gap-2">
+              <button onclick="downloadCurrentPdf()" class="px-4 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-semibold btn-press transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined text-base">download</span>Download
+              </button>
+            </div>
+          </div>
+          <iframe id="pdf-frame" class="pdf-frame" src=""></iframe>
+        </div>
+      </div>
+    </section>
+
+    <footer class="w-full py-12 md:py-16 mt-8">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <div class="bg-white/60 dark:bg-card backdrop-blur-xl rounded-[2rem] p-8 md:p-12 editorial-shadow border border-surface-container-high dark:border-db">
+          <div class="mb-5"><span class="material-symbols-outlined text-5xl md:text-6xl text-primary dark:text-primary-fixed-dim animate-pray" style="font-variation-settings:'FILL' 1,'wght' 400">volunteer_activism</span></div>
+          <p class="font-headline text-xl md:text-2xl font-bold text-on-surface dark:text-white leading-relaxed mb-3 animate-fade-up">دعواتكم للمساعد الخفي والعاملين على الموقع</p>
+          <p class="font-headline text-lg md:text-xl font-semibold text-primary dark:text-primary-fixed-dim animate-fade-up" style="animation-delay:.15s">بالتوفيق والسداد والزوجة الصالحة</p>
+          <div class="flex justify-center items-center gap-2 mt-6 opacity-50"><span class="animate-twinkle" style="animation-delay:0s">✦</span><span class="animate-twinkle" style="animation-delay:.4s">✦</span><span class="animate-twinkle" style="animation-delay:.8s">✦</span></div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // --------------------------------------------------------------
+    // EXACT 49 QUESTIONS from the provided PDF (Mid PMI -- Answers.pdf)
+    // each includes correct answer and explanation.
+    // --------------------------------------------------------------
+    const quizData = [
+      { n:1, q:"What is a project?", opts:["A permanent function within the organization","An ongoing operational activity without a defined end","A project is temporary and unique, operations are ongoing and repetitive","A routine task performed on a daily basis"], ans:"c", exp:"Projects are temporary endeavors with a defined beginning and end, creating a unique product, service, or result — unlike ongoing operations." },
+      { n:2, q:"What is a Resource Breakdown Structure (RBS)?", opts:["A breakdown of project requirements by stakeholder","Ongoing and repetitive activities that sustain the business","An activity that produces unique products or services","A hierarchical breakdown of project resources by category"], ans:"d", exp:"RBS is a hierarchical decomposition of resources by type (e.g., labor, equipment, materials) to support planning and control." },
+      { n:3, q:"What does the Iron Triangle (Triple Constraints) in project management consist of?", opts:["Quality, Risk, and Resources","Scope, Cost, and Time","People, Process, and Technology","Requirements, Design, and Testing"], ans:"b", exp:"The classic triple constraint: scope, schedule (time), and cost — any change affects the others." },
+      { n:4, q:"What is the purpose of a Project Management Office (PMO)?", opts:["To directly manage and execute all organizational projects","To standardize project governance and provide methodologies and templates","To replace project managers in decision-making roles","To eliminate the need for project documentation and processes"], ans:"b", exp:"PMO establishes standards, best practices, and governance frameworks across projects." },
+      { n:5, q:"Which type of PMO has the highest degree of control?", opts:["Supportive PMO","Directive PMO","Controlling PMO","Advisory PMO"], ans:"b", exp:"Directive PMO takes control by directly managing projects; supportive offers low control, controlling moderate." },
+      { n:6, q:"What is the role of a project sponsor?", opts:["To execute project tasks and deliverables","To provide funding, resources, and high-level support for the project","To manage day-to-day project activities","To create detailed technical specifications"], ans:"b", exp:"Sponsor champions the project, provides budget, and resolves issues above the project manager's authority." },
+      { n:7, q:"What is the purpose of a project charter?", opts:["To create a detailed project schedule with all tasks","To formally authorize the project and grant authority to the project manager","To document lessons learned from previous projects","To list all project team members and their contact information"], ans:"b", exp:"Charter formally initiates the project and gives the PM authority to apply resources." },
+      { n:8, q:"Which statement best describes Enterprise Environmental Factors (EEF)?", opts:["Internal processes and templates used by the organization","Conditions not under the project team's control that influence the project","Historical data from previous projects","Lessons learned documented by the project team"], ans:"b", exp:"EEFs include market conditions, regulations, culture — external or internal factors beyond team control." },
+      { n:9, q:"What are Organizational Process Assets (OPA)?", opts:["External market conditions affecting the project","Plans, processes, and knowledge bases specific to the organization","Government regulations and industry standards","Economic factors impacting project decisions"], ans:"b", exp:"OPAs are internal assets: templates, policies, lessons learned, and historical information." },
+      { n:10, q:"What is the difference between a project, program, and portfolio?", opts:["A portfolio contains programs, and programs contain projects","A project contains programs, and programs contain portfolios","They are independent with no hierarchical relationship","A program contains portfolios, and portfolios contain projects"], ans:"a", exp:"Portfolio → Programs → Projects. Portfolio aligns with strategy; programs group related projects." },
+      { n:11, q:"What is product management focused on?", opts:["Managing a temporary project with a defined end date","Maintaining a product throughout its entire lifecycle","Coordinating multiple related projects as a group","Providing administrative support to project teams"], ans:"b", exp:"Product management oversees the product lifecycle from conception to retirement." },
+      { n:12, q:"What is the purpose of a project management plan?", opts:["To formally authorize the existence of the project","To define how the project will be executed, monitored, and controlled","To document the project closure activities","To list all project stakeholders and their requirements"], ans:"b", exp:"The PM plan integrates all subsidiary plans and baselines to guide execution and control." },
+      { n:13, q:"What is the purpose of project baselines?", opts:["To assign resources to project tasks","To measure and compare project performance","To document team member training requirements","To create the project budget forecast"], ans:"b", exp:"Baselines (scope, schedule, cost) serve as reference points to measure performance variance." },
+      { n:14, q:"What is a Work Breakdown Structure (WBS)?", opts:["A hierarchical decomposition of project deliverables and work","A timeline showing project milestones and deadlines","A list of all project risks and their responses","A document describing team roles and responsibilities"], ans:"a", exp:"WBS breaks work into manageable components, focusing on deliverables, not activities." },
+      { n:15, q:"What is the main characteristic of the Waterfall approach?", opts:["Planning for each iteration with no advance planning","Creating a full project plan from the beginning with fixed scope","Welcoming changes throughout the project lifecycle","Delivering value continuously throughout the project"], ans:"b", exp:"Waterfall is linear, sequential, with detailed upfront planning and rigid scope." },
+      { n:16, q:"What is the main characteristic of the Agile approach?", opts:["Creating a detailed plan at the start and avoiding changes","Delivering all value only at the end of the project","Planning for each iteration and welcoming changes","Following a linear and sequential process"], ans:"c", exp:"Agile embraces change, iterative delivery, and adaptive planning." },
+      { n:17, q:"What is the purpose of a kick-off meeting?", opts:["To formally close the project and release the team","To align stakeholders and gain commitment to project objectives","To document lessons learned from the project","To create the final project report for the sponsor"], ans:"b", exp:"Kick-off aligns team and stakeholders, clarifies roles, and builds shared understanding." },
+      { n:18, q:"What does SWOT analysis examine?", opts:["Schedule, work plan, objectives, and timeline","Systems, workflow, operations, and technology","Scope, work breakdown, outcomes, and tasks","Strengths, weaknesses, opportunities, and threats"], ans:"d", exp:"SWOT assesses internal strengths/weaknesses and external opportunities/threats." },
+      { n:19, q:"What is the Triple Bottom Line (3Ps) concept?", opts:["Product, price, and promotion","Plan, process, and performance","Planet, people, and profit","Project, program, and portfolio"], ans:"c", exp:"Triple Bottom Line: social (people), environmental (planet), and financial (profit) performance." },
+      { n:20, q:"What is the purpose of a business case?", opts:["To justify the project and explain its value to the organization","To document the detailed project schedule","To list all project team members and their roles","To create the project risk register"], ans:"a", exp:"Business case provides economic justification, alignment with strategy, and expected benefits." },
+      { n:21, q:"What is a stakeholder?", opts:["Only the project sponsor and customer","Anyone interested in, involved in, or affected by the project","Only the internal project team members","Only external vendors and suppliers"], ans:"b", exp:"Stakeholders are individuals or groups who can impact or be impacted by the project." },
+      { n:22, q:"When should stakeholder identification occur?", opts:["Only during project initiation","Throughout the entire project lifecycle","Only when the project is closing","Only during the planning phase"], ans:"b", exp:"Stakeholder identification is iterative and continues as new stakeholders emerge." },
+      { n:23, q:"What is documented in a stakeholder register?", opts:["Detailed project technical specifications","Information about all project stakeholders and their interests","The project budget and cost estimates","The project schedule and milestones"], ans:"b", exp:"Stakeholder register includes identification, assessment, and classification details." },
+      { n:24, q:"What is the purpose of the Power/Interest grid?", opts:["To create the project budget","To develop the project schedule","To classify and prioritize stakeholders","To identify project risks"], ans:"c", exp:"Power/Interest grid helps determine engagement strategies based on influence and interest." },
+      { n:25, q:"What is the role of a Change Control Board (CCB)?", opts:["To execute project tasks","To review and approve or reject change requests","To create the project charter","To assign resources to projects"], ans:"b", exp:"CCB is the formal authority to approve or deny changes to baselines." },
+      { n:26, q:"What is the stakeholder engagement plan used for?", opts:["To document project technical requirements","To define strategies for engaging with stakeholders","To create the project budget forecast","To list project deliverables and milestones"], ans:"b", exp:"It outlines actions to involve stakeholders effectively and manage their expectations." },
+      { n:27, q:"What does the Net Promoter Score (NPS) measure?", opts:["Project schedule performance","Stakeholder satisfaction and loyalty","Team member technical skills","Project cost variance"], ans:"b", exp:"NPS gauges customer/stakeholder loyalty and likelihood to recommend." },
+      { n:28, q:"In which project phase do stakeholders have the most influence?", opts:["Initiating phase","Executing phase","Closing phase","Monitoring and controlling phase"], ans:"a", exp:"Influence is highest early; cost of change increases later." },
+      { n:29, q:"What is the steering committee responsible for?", opts:["Executing daily project tasks","Providing guidance and making high-level decisions","Creating detailed technical specifications","Managing project team schedules"], ans:"b", exp:"Steering committee provides strategic direction, approves major changes, and resolves issues." },
+      { n:30, q:"What is direct communication with stakeholders encouraged for?", opts:["Avoiding project documentation requirements","Building relationships and clarifying expectations","Eliminating the need for status reports","Reducing the number of project meetings"], ans:"b", exp:"Direct communication builds trust, manages expectations, and reduces misunderstandings." },
+      { n:31, q:"What is the difference between a co-located team and a virtual team?", opts:["Co-located teams work in the same physical location, virtual teams work remotely","Co-located teams are always more productive than virtual teams","Virtual teams are only used for large projects","There is no significant difference between them"], ans:"a", exp:"Co-located shares workspace; virtual uses technology across distances." },
+      { n:32, q:"What does RACI stand for?", opts:["Responsible, Accountable, Consulted, Informed","Resources, Activities, Costs, Issues","Requirements, Analysis, Control, Implementation","Risks, Actions, Changes, Improvements"], ans:"a", exp:"RACI matrix clarifies roles: who does, who decides, who advises, who is notified." },
+      { n:33, q:"What is a team charter used for?", opts:["To document ground rules and team agreements","To formally authorize the project budget","To create the project schedule","To list project stakeholders"], ans:"a", exp:"Team charter sets norms, values, and working agreements for the team." },
+      { n:34, q:"What are the five stages of team development according to Tuckman?", opts:["Planning, executing, monitoring, closing, and evaluating","Forming, storming, norming, performing, and adjourning","Initiating, planning, developing, implementing, and closing","Recruiting, training, working, reviewing, and releasing"], ans:"b", exp:"Tuckman's model: Forming → Storming → Norming → Performing → Adjourning." },
+      { n:35, q:"What is servant leadership?", opts:["A leadership style focused on serving and enabling the team","A leadership style where the leader makes all decisions alone","A leadership style focused on punishing poor performance","A leadership style that avoids all team interaction"], ans:"a", exp:"Servant leaders prioritize team growth, empowerment, and removing obstacles." },
+      { n:36, q:"What is emotional intelligence?", opts:["The ability to understand and manage one's own emotions and others' emotions","The ability to calculate complex mathematical problems","The ability to create detailed project schedules","The ability to manage project budgets accurately"], ans:"a", exp:"EI includes self-awareness, empathy, and relationship management — critical for leaders." },
+      { n:37, q:"What is the purpose of team-building activities?", opts:["To replace regular project work and meetings","To strengthen relationships and improve team collaboration","To eliminate the need for project documentation","To reduce project costs and resources"], ans:"b", exp:"Team building enhances trust, communication, and cohesion." },
+      { n:38, q:"What is the Halo Effect?", opts:["A cognitive bias where success in one area leads to assumptions about other areas","A technique for measuring project performance","A method for creating project schedules","A tool for identifying project risks"], ans:"a", exp:"Halo effect: generalizing a positive trait (e.g., technical skill) to unrelated areas (e.g., management ability)." },
+      { n:39, q:"What is a cross-functional team?", opts:["A team where all members have the same expertise","A team composed of members with different skills and expertise","A team that works on only one type of project","A team that never collaborates with other departments"], ans:"b", exp:"Cross-functional teams bring diverse skills (e.g., dev, QA, marketing) to solve complex problems." },
+      { n:40, q:"What is the purpose of a resource management plan?", opts:["To define how project resources will be identified, acquired, and managed","To eliminate the need for human resources on projects","To create project risks and issues","To replace the project manager's role"], ans:"a", exp:"Resource plan covers acquisition, development, and release of physical and human resources." },
+      { n:41, q:"What is the difference between intrinsic and extrinsic motivation?", opts:["Intrinsic comes from internal satisfaction, extrinsic comes from external rewards","Intrinsic is for managers only, extrinsic is for team members only","Intrinsic is always better than extrinsic motivation","There is no difference between the two types"], ans:"a", exp:"Intrinsic (personal growth, purpose) vs extrinsic (bonuses, recognition) – both matter." },
+      { n:42, q:"What is the purpose of a training gap analysis?", opts:["To identify skills the team lacks and plan training to address them","To eliminate training requirements from the project","To replace team members with external consultants","To reduce the project budget"], ans:"a", exp:"Gap analysis compares current vs required competencies to design effective training." },
+      { n:43, q:"What is the difference between rewards and recognition?", opts:["Rewards are tangible and expected, recognition is intangible and often unexpected","Rewards are only for managers, recognition is only for team members","Rewards are always better than recognition","There is no difference between rewards and recognition"], ans:"a", exp:"Rewards (bonuses, gifts) are concrete; recognition (praise, thanks) is psychological." },
+      { n:44, q:"What is the purpose of a communication management plan?", opts:["To define what information will be shared, with whom, and how often","To eliminate all project communication","To prevent stakeholder engagement","To create conflicts between team members"], ans:"a", exp:"Communication plan defines information needs, frequency, channels, and escalation paths." },
+      { n:45, q:"What is interactive communication?", opts:["One-way communication where no feedback is expected","Real-time exchange of information between parties","Communication that occurs only through written documents","Communication that is delayed and asynchronous"], ans:"b", exp:"Interactive (meetings, calls) allows immediate feedback and clarification." },
+      { n:46, q:"What is the purpose of conflict resolution in project management?", opts:["To eliminate all disagreements between team members permanently","To address disagreements and find solutions that benefit the project","To remove team members who have conflicts","To avoid all communication between conflicting parties"], ans:"b", exp:"Conflict resolution aims to reach constructive outcomes, not eliminate all disagreement." },
+      { n:47, q:"What is osmotic communication?", opts:["Information that is absorbed indirectly through the work environment","Communication that only occurs in formal meetings","Communication using only digital tools","A formal reporting process to management"], ans:"a", exp:"Osmotic communication happens when team members overhear relevant discussions (common in co-located Agile teams)." },
+      { n:48, q:"What is the Myers-Briggs Type Indicator (MBTI) used for?", opts:["To assess personality types and understand team member preferences","To calculate project costs and budgets","To create project schedules and timelines","To identify project risks and issues"], ans:"a", exp:"MBTI categorizes personality preferences to improve team dynamics and communication." },
+      { n:49, q:"What is a T-shaped skill profile?", opts:["Deep expertise in one area combined with general knowledge in related areas","Broad knowledge in many areas with no specific expertise","Skills that are only useful for technical projects","Skills limited to management activities only"], ans:"a", exp:"T-shaped professionals have deep specialization (vertical bar) plus collaboration breadth (horizontal bar)." }
+    ];
+
+    const lectures = [
+      { name: "Project Management Slides", file: "Project Management Slides.pdf", icon: "auto_stories", color: "from-teal-500 to-cyan-600" }
+    ];
+
+    let currentPdf = '';
+    const letters = ['a','b','c','d'];
+
+    function buildQuestions() {
+      const container = document.getElementById('questions-container');
+      container.innerHTML = '';
+      quizData.forEach((q, idx) => {
+        const num = String(q.n).padStart(2,'0');
+        const delay = Math.min(idx * 30, 600);
+        let optsHtml = q.opts.map((opt, oi) => `<label class="option-label relative flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-2xl border border-outline-variant/20 dark:border-db cursor-pointer hover:bg-surface-container-low dark:hover:bg-scl transition-all">
+          <input type="radio" name="q${q.n}" value="${letters[oi]}" class="w-4 h-4 md:w-5 md:h-5 text-primary focus:ring-primary border-outline-variant bg-transparent accent-[#3D8B8B]"/>
+          <span class="font-body text-sm md:text-base text-on-surface-variant dark:text-sv font-medium">${letters[oi]}) ${opt}</span>
+        </label>`).join('');
+        container.innerHTML += `<article class="q-card bg-white dark:bg-card rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-8 editorial-shadow border border-surface-container-high dark:border-db animate-fade-up" style="animation-delay:${delay}ms" data-qnum="${q.n}">
+          <div class="flex flex-col gap-4 md:gap-6"><div class="flex justify-between items-start"><span class="font-label text-[10px] md:text-xs font-bold text-secondary dark:text-s uppercase tracking-widest bg-secondary-fixed/30 dark:bg-amber-900/20 px-3 py-1 rounded-full">Question ${num}</span></div>
+          <h3 class="font-headline text-base md:text-xl font-bold text-on-surface dark:text-white leading-snug">${q.q}</h3>
+          <div class="grid grid-cols-1 gap-3 md:gap-4">${optsHtml}</div>
+          <div class="flex flex-col gap-3"><div class="answer-feedback hidden" id="feedback-${q.n}"></div><div class="reveal-content" id="reveal-${q.n}"><div class="exp-box exp-visible"><div class="items-start gap-3 flex"><span class="material-symbols-outlined text-secondary dark:text-s text-xl">info</span><div class="text-sm md:text-base leading-relaxed text-on-surface-variant dark:text-sv"><p class="font-bold mb-1 text-secondary dark:text-s">Explanation:</p>${q.exp}</div></div></div></div></div></div></article>`;
+      });
+      document.querySelectorAll('input[type="radio"]').forEach(radio => radio.addEventListener('change', handleAnswer));
+    }
+
+    function handleAnswer(e) {
+      const qNum = parseInt(e.target.name.substring(1));
+      const selected = e.target.value;
+      const qData = quizData.find(q => q.n === qNum);
+      const feedback = document.getElementById(`feedback-${qNum}`);
+      const card = e.target.closest('.q-card');
+      card.querySelectorAll('.option-label').forEach(l => l.classList.remove('correct-answer','incorrect-answer'));
+      const isCorrect = selected === qData.ans;
+      const selectedLabel = e.target.closest('.option-label');
+      if(isCorrect) {
+        selectedLabel.classList.add('correct-answer');
+        feedback.className = 'answer-feedback answer-correct animate-fade-up';
+        feedback.innerHTML = `<div class="flex flex-col items-start gap-2"><span class="font-bold">✅ Correct!</span><button onclick="revealPart(${qNum})" class="btn-reveal btn-reveal-exp" id="btn-reveal-${qNum}"><span class="material-symbols-outlined text-sm">lightbulb</span>Show Explanation</button></div>`;
+      } else {
+        selectedLabel.classList.add('incorrect-answer');
+        feedback.className = 'answer-feedback answer-incorrect animate-fade-up';
+        feedback.innerHTML = `<div class="flex flex-col items-start gap-2"><span class="font-bold">❌ Incorrect</span><button onclick="revealPart(${qNum}, true)" class="btn-reveal btn-reveal-correct" id="btn-reveal-${qNum}"><span class="material-symbols-outlined text-sm">visibility</span>Show Correct Choice</button></div>`;
+      }
+      feedback.classList.remove('hidden');
+      document.getElementById(`reveal-${qNum}`).style.display = 'none';
+      updateProgress();
+    }
+
+    function revealPart(n, showAnswer = false) {
+      const revealBox = document.getElementById(`reveal-${n}`);
+      const btn = document.getElementById(`btn-reveal-${n}`);
+      const qData = quizData.find(q => q.n === n);
+      if(revealBox) revealBox.style.display = 'block';
+      if(btn) btn.style.display = 'none';
+      if(showAnswer) {
+        const feedback = document.getElementById(`feedback-${n}`);
+        const card = feedback.closest('.q-card');
+        const correctIdx = letters.indexOf(qData.ans);
+        card.querySelectorAll('.option-label')[correctIdx].classList.add('correct-answer');
+        feedback.querySelector('span').innerHTML = `❌ Incorrect — Correct answer: <strong class="text-primary dark:text-p">${qData.ans.toUpperCase()}</strong>`;
+      }
+    }
+
+    function showAllAnswers() { quizData.forEach(q => { const card = document.querySelector(`[data-qnum="${q.n}"]`); if(!card) return; const correctIdx = letters.indexOf(q.ans); const labels = card.querySelectorAll('.option-label'); labels.forEach(l=>l.classList.remove('correct-answer','incorrect-answer')); labels[correctIdx].classList.add('correct-answer'); labels[correctIdx].querySelector('input').checked = true; const feedback = document.getElementById(`feedback-${q.n}`); feedback.className='answer-feedback answer-correct animate-fade-up'; feedback.innerHTML=`<span class="font-bold">✅ Correct Answer: ${q.ans.toUpperCase()}</span>`; feedback.classList.remove('hidden'); revealPart(q.n); }); updateProgress(); }
+    function hideAllAnswers() { quizData.forEach(q => { const card = document.querySelector(`[data-qnum="${q.n}"]`); if(!card) return; card.querySelectorAll('.option-label').forEach(l=>l.classList.remove('correct-answer','incorrect-answer')); const fb = document.getElementById(`feedback-${q.n}`); fb.classList.add('hidden'); fb.innerHTML=''; const rev = document.getElementById(`reveal-${q.n}`); if(rev) rev.style.display='none'; }); }
+    function resetQuiz() { document.querySelectorAll('input[type="radio"]').forEach(r=>r.checked=false); hideAllAnswers(); updateProgress(); window.scrollTo({top:0,behavior:'smooth'}); }
+    function updateProgress() { const answered = document.querySelectorAll('input[type="radio"]:checked').length; document.getElementById('answered-count').textContent = answered; document.getElementById('progress-bar').style.width = `${(answered/49)*100}%`; }
+
+    let activeSlideIdx = 0;
+    function buildSlides() {
+      const list = document.getElementById('slides-list');
+      const isMobile = window.innerWidth < 768;
+      list.innerHTML = lectures.map((l,i) => `<div class="slide-item flex items-center gap-4 p-4 rounded-2xl border ${i===activeSlideIdx ? 'active-slide border-primary/30 dark:border-primary-fixed-dim/30' : 'border-outline-variant/20 dark:border-db'} bg-white dark:bg-card cursor-pointer animate-fade-up transition-all" data-slide-idx="${i}" onclick="selectSlide(${i})"><div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 dark:bg-primary-fixed-dim/10 flex items-center justify-center"><span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-xl">${l.icon}</span></div><div class="flex-1 min-w-0"><h3 class="font-headline font-bold text-on-surface dark:text-white text-sm md:text-base truncate">${l.name}</h3><p class="text-on-surface-variant dark:text-sv text-xs">PDF Document</p></div><div class="flex items-center gap-2 flex-shrink-0">${!isMobile ? `<button onclick="event.stopPropagation();selectSlide(${i})" class="px-4 py-2 ${i===activeSlideIdx ? 'bg-primary dark:bg-primary-fixed-dim text-white dark:text-on-primary-fixed' : 'bg-surface-container-low dark:bg-scl text-on-surface-variant dark:text-sv hover:bg-surface-container'} rounded-xl text-xs font-semibold btn-press transition-all flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">visibility</span>View</button>` : ''}<button onclick="event.stopPropagation();openPdfNewTab(${i})" class="px-4 py-2 bg-surface-container-low dark:bg-scl text-on-surface-variant dark:text-sv rounded-xl text-xs font-semibold btn-press hover:bg-surface-container dark:hover:bg-sc transition-all flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">open_in_new</span><span class="hidden sm:inline">Open</span></button></div></div>`).join('');
+    }
+    function selectSlide(idx) { activeSlideIdx = idx; const l = lectures[idx]; currentPdf = l.file; buildSlides(); if(window.innerWidth>=768) { document.getElementById('pdf-title').textContent = l.name; document.getElementById('pdf-frame').src = l.file; document.getElementById('pdf-viewer-wrap').classList.remove('hidden'); document.getElementById('pdf-viewer-wrap').scrollIntoView({behavior:'smooth',block:'start'}); } }
+    function openPdfNewTab(idx) { window.open(lectures[idx].file, '_blank'); }
+    function downloadCurrentPdf() { if(!currentPdf) return; const a = document.createElement('a'); a.href = currentPdf; a.download = currentPdf; a.click(); }
+    function showSection(section) { const quizDiv=document.getElementById('quiz-section'), slidesDiv=document.getElementById('slides-section'); const navQuiz=document.getElementById('nav-quiz'), navSlides=document.getElementById('nav-slides'); const active=['bg-white','dark:bg-card','shadow-sm','rounded-full','text-primary','dark:text-p','font-bold']; const inactive=['text-on-surface-variant','dark:text-sv','font-medium']; if(section==='quiz') { quizDiv.classList.remove('hidden'); slidesDiv.classList.add('hidden'); navQuiz.classList.add(...active); navQuiz.classList.remove(...inactive); navSlides.classList.remove(...active); navSlides.classList.add(...inactive); } else { quizDiv.classList.add('hidden'); slidesDiv.classList.remove('hidden'); navSlides.classList.add(...active); navSlides.classList.remove(...inactive); navQuiz.classList.remove(...active); navQuiz.classList.add(...inactive); } window.scrollTo({top:0,behavior:'smooth'}); }
+    function toggleTheme() { const html=document.documentElement; const isDark=html.classList.contains('dark'); html.classList.toggle('dark'); const icon=isDark ? 'dark_mode' : 'light_mode'; document.querySelectorAll('#themeToggleMobile .material-symbols-outlined, #themeToggleDesktop .material-symbols-outlined').forEach(el=>el.textContent=icon); localStorage.setItem('cg-theme',isDark?'light':'dark'); }
+    document.addEventListener('DOMContentLoaded',()=>{ const saved=localStorage.getItem('cg-theme'); if(saved==='dark'){ document.documentElement.classList.add('dark'); document.querySelectorAll('#themeToggleMobile .material-symbols-outlined, #themeToggleDesktop .material-symbols-outlined').forEach(el=>el.textContent='light_mode'); } buildQuestions(); buildSlides(); if(window.innerWidth>=768){ currentPdf=lectures[0].file; document.getElementById('pdf-frame').src=lectures[0].file; document.getElementById('pdf-title').textContent=lectures[0].name; } });
+  </script>
+</body>
+
+</html>
